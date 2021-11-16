@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "obplatform"
+version = "0.1.0"
+description = "APIs to access ASHRAE OB Database"
+authors = ["Wei Mu <wmu100@syr.edu>"]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+requests = "^2.26.0"
+
+[tool.poetry.dev-dependencies]
+pytest = "^5.2"
+flake8 = "^4.0.1"
+black = "^21.10b0"
+isort = "^5.10.1"
+mypy = "^0.910"
+Sphinx = "^4.3.0"
+sphinx-rtd-theme = "^1.0.0"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
