@@ -1,0 +1,62 @@
+[
+    {
+        "label": "Appliance Usage",
+        "key": "Appliance_Usage",
+        "disabled": false
+    },
+    {
+        "label": "Ceiling Fan Control",
+        "key": "Fan_Status",
+        "disabled": false
+    },
+    {
+        "label": "Door Adjustment",
+        "key": "Door_Status",
+        "disabled": false
+    },
+    {
+        "label": "HVAC Measurement",
+        "key": "HVAC_Measurement",
+        "disabled": false
+    },
+    {
+        "label": "Lighting Adjustment",
+        "key": "Lighting_Status",
+        "disabled": false
+    },
+    {
+        "label": "Occupant Number",
+        "key": "Occupant_Number",
+        "disabled": false
+    },
+    {
+        "label": "Occupant Presence",
+        "key": "Occupancy",
+        "disabled": false
+    },
+    {
+        "label": "Other_HeatWave",
+        "key": "Other_HeatWave",
+        "disabled": false
+    },
+    {
+        "label": "Other_Role of habits in consumption",
+        "key": "Other_Role of habits in consumption",
+        "disabled": false
+    },
+    {
+        "label": "Other_IAQ in Affordable Housing",
+        "key": "Other_IAQ in Affordable Housing",
+        "disabled": false
+    },
+    {
+        "label": "Shading Adjustment",
+        "key": "Shading_Status",
+        "disabled": false
+    },
+    {
+        "label": "Window Adjustment",
+        "key": "Window_Status",
+        "disabled": false
+    }
+]
