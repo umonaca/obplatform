@@ -1,5 +1,5 @@
 """APIs to query and download archive from the remote database"""
-from typing import Any, List
+from typing import Any, Dict, List
 
 import requests
 
@@ -18,7 +18,7 @@ class Connector:
         self.endpoint = endpoint
         self.session = requests.Session()
 
-    def list_behaviors(self) -> List[Any]:
+    def list_behaviors(self) -> List[Dict[str, Any]]:
         """
         List all behaviors available in the database
         """
