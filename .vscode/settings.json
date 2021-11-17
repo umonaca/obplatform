@@ -16,7 +16,8 @@
         "--ignore-missing-imports",
         "--follow-imports=silent",
         "--show-column-numbers",
-        "--strict"
+        "--strict",
+        "--exclude tests/"
     ],
     "[python]": {
         "editor.codeActionsOnSave": {
