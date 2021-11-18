@@ -80,7 +80,7 @@ a special case.
 Changelog
 ---------
 
--  2021-11-18: Release 0.1.1
+-  2021-11-18: Release 0.1.2
 
 TODO
 ----
