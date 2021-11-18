@@ -1,7 +1,6 @@
 """APIs to query and download archive from the remote database"""
 from __future__ import annotations
 
-import logging
 import time
 from typing import Any, Dict, List, Optional
 
@@ -193,19 +192,4 @@ class ProgressBar:
         self.close()
 
 
-if __name__ == "__main__":
-    # Test
-    connector = Connector(ENDPOINT)
-    print(connector.list_behaviors())
-
-    # print progress information
-    logger.setLevel(logging.DEBUG)
-
-    connector.download_export(
-        "data.zip",
-        ["Appliance_Usage", "Occupancy"],
-        ["22", "11", "2"],
-        show_progress_bar=True,
-    )
-
-__all__ = ["Connector"]
+__all__ = ["Connector", "logger"]
