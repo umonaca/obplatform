@@ -14,27 +14,54 @@ ENDPOINT = "https://api.ashraeobdatabase.com"
 
 
 class Connector:
-    """
-    Connector to the remote database
+    """Connector to the remote database
+
+    Attributes:
+        endpoint: The endpoint of the remote database
+        session: Requests session to communicate with the remote database
     """
 
     def __init__(self, endpoint: str = ENDPOINT) -> None:
-        """
-        Initialize the connector
+        """Initialize the connector
+
+        Args:
+            endpoint:
+                The endpoint of the remote database, currently this should be
+                "https://api.ashraeobdatabase.com"
         """
         self.endpoint = endpoint
         self.session = requests.Session()
 
     def list_behaviors(self) -> List[Dict[str, Any]]:
-        """
-        List all behaviors available in the database
+        """Lists all behaviors available in the database
+
+        Returns:
+            List of dicts showing all behaviors in the database.
+            The "key" field is what users should use to query and download the data.
+            The "label" field is what is displayed to users on the website
+
+            For example,
+            {
+                "label": "Occupant Presence",
+                "key": "Occupancy",
+                "disabled": false
+            }
+            "Occupant Presence" is the behavior name shown on the website,
+            "Occupancy" is what users should use in API and other functions in
+            this module to query and download the data from the database.
         """
         response = self.session.get(self.endpoint + "/api/v1/behaviors")
         return response.json()  # type: ignore
 
     def _start_export_job(self, behavior_ids: List[str], studies: List[str]) -> str:
-        """
-        Inform server to start compressing data files for the given behaviors
+        """Inform server to start compressing data files for the given behaviors and studies
+
+        Args:
+            behavior_ids: List of behavior ids to download
+            studies: List of study ids to download
+
+        Returns:
+            The URI of the job, used by _poll_export_job to check the status
         """
         response = self.session.post(
             self.endpoint + "/api/v1/exports",
@@ -49,8 +76,14 @@ class Connector:
         return response.headers["location"]
 
     def _poll_export_job(self, job_uri: str) -> requests.Response:
-        """
-        Poll the export job status
+        """Poll the export job status
+
+        Args:
+            job_uri: The URI of the job, provided by _start_export_job
+
+        Returns:
+            The response of the server. The download has not started yet.
+            See "requests" package document for details on option stream=True.
         """
 
         logger.info("Waiting for server to finish...")
@@ -74,8 +107,20 @@ class Connector:
         show_progress_bar: bool = False,
         chunk_size: Optional[int] = 1000 * 1024,
     ) -> None:
-        """
-        Download the data archive (ZIP) for the given behaviors
+        """Download the data archive (ZIP) for the given behaviors
+
+        Args:
+            filename:
+                The filename to save the archive
+            behavior_ids:
+                List of behavior ids to download
+            studies:
+                List of study ids to download
+            show_progress_bar:
+                Whether to show a progress bar
+            chunk_size:
+                The size of each chunk to download. If None, download the whole file.
+                Default is 1000 * 1024 Bytes.
         """
         _behavior_ids: List[str] = list(map(str, behavior_ids))
         # Because there is an unfixed bug on the server side, it currently only
@@ -96,11 +141,21 @@ class Connector:
 
 
 class ProgressBar:
-    """
-    Progress bar for download progress
+    """Progress bar for download progress
+
+    Attributes:
+        total_size_in_bytes: Total size of the file to download
+        current_size_in_bytes: Current size of the chunks downloaded
+        progress_bar: A tqdm progress bar
     """
 
     def __init__(self, total_size_in_bytes: int = 0, use_tqdm: bool = False) -> None:
+        """Initialize progress logger and progress bar
+
+        Args:
+            total_size_in_bytes: Total size of the file to download
+            use_tqdm: Whether to use tqdm progress bar
+        """
         self.total_size_in_bytes: int = total_size_in_bytes
         self.current_size_in_bytes: int = 0
         self.progress_bar: Optional[Any] = None
@@ -115,12 +170,18 @@ class ProgressBar:
             logger.info(f"Total size: {total_size_in_bytes} bytes")
 
     def update(self, chunk_size_in_bytes: int) -> None:
+        """Log current chunk size and update the progress bar
+
+        Args:
+            chunk_size_in_bytes: The size of the current chunk downloaded
+        """
         self.current_size_in_bytes += chunk_size_in_bytes
         logger.debug(f"Current chunk size: {chunk_size_in_bytes}")
         if self.progress_bar:
             self.progress_bar.update(chunk_size_in_bytes)
 
     def close(self) -> None:
+        """Show total bytes downloaded and clean up"""
         if self.progress_bar:
             self.progress_bar.close()
         logger.info(f"Downloaded {self.current_size_in_bytes} bytes")
@@ -144,7 +205,7 @@ if __name__ == "__main__":
         "data.zip",
         ["Appliance_Usage", "Occupancy"],
         ["22", "11", "2"],
-        show_progress_bar=False,
+        show_progress_bar=True,
     )
 
 __all__ = ["Connector"]
