@@ -1,5 +1,18 @@
+.. OBPlatform documentation master file, created by
+   sphinx-quickstart on Thu Nov 18 04:12:00 2021.
+   You can adapt this file completely to your liking, but it should at least
+   contain the root `toctree` directive.
+
+.. toctree::
+   :maxdepth: 2
+   :hidden:
+
+   Introduction <self>
+
+======================================
 OBPlatform
-==========
+======================================
+
 
 A package to interact and download behavior data from ASHRAE OB
 Database. Currently available on PyPI. More features coming in the
@@ -82,7 +95,7 @@ Usage
 Available behavior types
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-Please only use the following names as input. e.g. Please use
+**Please only use the following names as input**. e.g. Please use
 ``Lighting_Status`` (listed below) instead of
 ``Lighting Adjustment``\ (displayed on the website).
 
@@ -93,15 +106,14 @@ Please only use the following names as input. e.g. Please use
 In the next version, the package will auto detect either type of input
 and convert to the correct query parameter.
 
-Note: big data
-~~~~~~~~~~~~~~
+.. note::
 
-Study 2 is a special case. It has very large source files (> 2 GB) so we
-compressed all data in study 2 as a single ``.tar.gz``\ file. In the
-example above, ``data.zip`` contains a ``tar.gz``\ file along with
-several separate csv files from other studies. When writing libraries to
-read from csv file from the downloaded zip, Study 2 should be treated as
-a special case.
+   Study 2 is a special case. It has very large source files (> 2 GB) so we
+   compressed all data in study 2 as a single ``.tar.gz``\ file. In the
+   example above, ``data.zip`` contains a ``tar.gz``\ file along with
+   several separate csv files from other studies. When writing libraries to
+   read from csv file from the downloaded zip, Study 2 should be treated as
+   a special case.
 
 Changelog
 ---------
@@ -123,7 +135,6 @@ TODO
 API Reference
 -------------
 
-TODO
 
 .. |pypi| image:: https://img.shields.io/pypi/v/obplatform.svg
    :target: https://pypi.python.org/pypi/obplatform
@@ -135,3 +146,9 @@ TODO
 .. |PyPI - Python Version| image:: https://img.shields.io/pypi/pyversions/obplatform
 .. |Code style: black| image:: https://img.shields.io/badge/code%20style-black-000000.svg
    :target: https://github.com/psf/black
+
+
+.. toctree::
+    :maxdepth: 2
+
+    modules

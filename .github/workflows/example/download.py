@@ -2,7 +2,7 @@ import logging
 import zipfile
 
 import pandas as pd
-from obplatform.connector import Connector, logger
+from obplatform import Connector, logger
 
 connector = Connector()
 

@@ -1,5 +1,4 @@
 {
-    "restructuredtext.confPath": "${workspaceFolder}/docs/source",
     "workbench.colorCustomizations": {
         "editorRuler.foreground": "#ff4081"
     },
@@ -9,7 +8,8 @@
 
     "python.linting.flake8Enabled": true,
     "python.linting.flake8Args": [
-        "--max-line-length=120"
+        "--max-line-length=120",
+        "--exclude .git,__pycache__,docs/conf.py,old,build,dist"
     ],    
     "python.linting.mypyEnabled": true,
     "python.linting.mypyArgs": [
@@ -17,6 +17,7 @@
         "--follow-imports=silent",
         "--show-column-numbers",
         "--strict",
+        "--exclude docs/"
     ],
     "[python]": {
         "editor.codeActionsOnSave": {
@@ -28,6 +29,7 @@
         "editor.formatOnSave": true,
     },
     "python.sortImports.args": [
-        "--profile", "black"
-    ]
+        "--profile", "black",
+    ],
+    "restructuredtext.confPath": "${workspaceFolder}/docs"
 }

@@ -39,12 +39,8 @@ class Connector:
             The "key" field is what users should use to query and download the data.
             The "label" field is what is displayed to users on the website
 
-            For example,
-            {
-                "label": "Occupant Presence",
-                "key": "Occupancy",
-                "disabled": false
-            }
+            For example, {"label": "Occupant Presence", "key": "Occupancy",
+            "disabled": false}
             "Occupant Presence" is the behavior name shown on the website,
             "Occupancy" is what users should use in API and other functions in
             this module to query and download the data from the database.
