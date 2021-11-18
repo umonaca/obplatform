@@ -8,6 +8,16 @@ available on PyPI. More features coming in the furture.
 |pypi| |CI| |codecov| |license| |PyPI - Python Version| |Code style:
 black| |Read the Docs|
 
+Features
+--------
+
+-  List all behavior types available in the database.
+-  Download data archive (ZIP file) based on behavior type and study id
+   inputs (with progress bar).
+-  Query studies based on (behaviors, countries, cities, (building type
+   + room type)) (WIP).
+-  Query available behavior types based on study ids (WIP)
+
 Installation
 ------------
 
@@ -30,16 +40,6 @@ conda
 
 We are going to submit the package to ``conda-forge``. It requires
 manual review process from Anaconda.
-
-Features
---------
-
--  List all behavior types available in the database.
--  Download data archive (ZIP file) based on behavior type and study id
-   inputs (with progress bar).
--  Query studies based on (behaviors, countries, cities, (building type
-   + room type)) (WIP).
--  Query available behavior types based on study ids (WIP)
 
 Example
 -------
