@@ -81,7 +81,7 @@ Study 2 is a special case. It has very large source files (> 2 GB) so we compres
 
 ## Changelog
 
-- 2021-11-18:  Release 0.1.2
+- 2021-11-18:  Release 0.1.3
 
 ## TODO
 

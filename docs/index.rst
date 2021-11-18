@@ -117,7 +117,7 @@ and convert to the correct query parameter.
 Changelog
 ---------
 
--  2021-11-18: Release 0.1.2
+-  2021-11-18: Release 0.1.3
 
 TODO
 ----
