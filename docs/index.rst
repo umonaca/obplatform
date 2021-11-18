@@ -13,9 +13,9 @@ OBPlatform
 ======================================
 
 
-A package to interact and download behavior data from ASHRAE OB
-Database. Currently available on PyPI. More features coming in the
-furture.
+A package to interact and download behavior data from `ASHRAE Global
+Occupant Behavior Database <https://ashraeobdatabase.com>`__. Currently
+available on PyPI. More features coming in the furture.
 
 |pypi| |CI| |codecov| |license| |PyPI - Python Version| |Code style:
 black| |Read the Docs|
