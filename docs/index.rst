@@ -18,7 +18,7 @@ Database. Currently available on PyPI. More features coming in the
 furture.
 
 |pypi| |CI| |codecov| |license| |PyPI - Python Version| |Code style:
-black|
+black| |Read the Docs|
 
 Installation
 ------------
@@ -145,6 +145,7 @@ API Reference
 .. |PyPI - Python Version| image:: https://img.shields.io/pypi/pyversions/obplatform
 .. |Code style: black| image:: https://img.shields.io/badge/code%20style-black-000000.svg
    :target: https://github.com/psf/black
+.. |Read the Docs| image:: https://img.shields.io/readthedocs/obplatform
 
 
 .. toctree::

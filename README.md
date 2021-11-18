@@ -2,7 +2,7 @@
 
 A package to interact and download behavior data from ASHRAE OB Database. Currently available on PyPI. More features coming in the furture.
 
-[![pypi](https://img.shields.io/pypi/v/obplatform.svg)](https://pypi.python.org/pypi/obplatform) [![CI](https://github.com/umonaca/obplatform/actions/workflows/test.yml/badge.svg?event=push)](https://github.com/umonaca/obplatform/actions?query=event%3Apush+branch%3Amaster) [![codecov](https://codecov.io/gh/umonaca/obplatform/branch/master/graph/badge.svg?token=SCFFFX2IKX)](https://codecov.io/gh/umonaca/obplatform) ![license](https://img.shields.io/github/license/umonaca/obplatform) ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/obplatform) [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+[![pypi](https://img.shields.io/pypi/v/obplatform.svg)](https://pypi.python.org/pypi/obplatform) [![CI](https://github.com/umonaca/obplatform/actions/workflows/test.yml/badge.svg?event=push)](https://github.com/umonaca/obplatform/actions?query=event%3Apush+branch%3Amaster) [![codecov](https://codecov.io/gh/umonaca/obplatform/branch/master/graph/badge.svg?token=SCFFFX2IKX)](https://codecov.io/gh/umonaca/obplatform) ![license](https://img.shields.io/github/license/umonaca/obplatform) ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/obplatform) [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black) ![Read the Docs](https://img.shields.io/readthedocs/obplatform)
 
 ## Installation
 
