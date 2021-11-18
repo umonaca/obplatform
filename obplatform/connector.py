@@ -7,6 +7,7 @@ import time
 from typing import Any, Dict, List, Optional
 
 import requests
+from tqdm import tqdm
 
 from .logger import logger
 
@@ -106,14 +107,9 @@ class ProgressBar:
         self.progress_bar: Optional[Any] = None
 
         if use_tqdm:
-            if importlib.util.find_spec("tqdm") is None:
-                logger.warn("tqdm must be installed to show download progress bar.")
-            else:
-                from tqdm import tqdm
-
-                self.progress_bar = tqdm(
-                    total=total_size_in_bytes, unit="iB", unit_scale=True
-                )
+            self.progress_bar = tqdm(
+                total=total_size_in_bytes, unit="iB", unit_scale=True
+            )
 
         # Sometimes content length is not available. However, tqdm supports total=0
         if total_size_in_bytes:
