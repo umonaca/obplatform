@@ -34,7 +34,7 @@ src = "pyproject.toml"
 
 [[before_commit]]
 name = "check changelog"
-cmd = "pandoc README.md --from markdown --to rst -o README.rst && grep -q -F {new_version} README.rst"
+cmd = "pandoc README.md --from markdown --to rst -o README.rst && grep -q -F {new_version} README.rst && grep -q -F {new_version} docs/index.rst"
 
 # Or run some commands after the git tag and the branch
 # have been pushed:
