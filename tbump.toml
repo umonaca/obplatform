@@ -40,4 +40,4 @@ cmd = "./build.sh"
 # have been pushed:
 [[after_push]]
 name = "publish"
-cmd = "poetry publish --build"
+cmd = "poetry build && poetry publish"
