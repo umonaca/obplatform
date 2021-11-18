@@ -17,7 +17,6 @@
         "--follow-imports=silent",
         "--show-column-numbers",
         "--strict",
-        "--exclude tests/"
     ],
     "[python]": {
         "editor.codeActionsOnSave": {
