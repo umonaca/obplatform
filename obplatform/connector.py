@@ -1,7 +1,6 @@
 """APIs to query and download archive from the remote database"""
 from __future__ import annotations
 
-import importlib.util
 import logging
 import time
 from typing import Any, Dict, List, Optional
