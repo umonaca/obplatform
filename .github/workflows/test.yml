@@ -29,3 +29,5 @@ jobs:
 
       - name: Run tests
         run: tox
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
