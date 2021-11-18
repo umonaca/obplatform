@@ -5,7 +5,7 @@ A package to interact and download behavior data from ASHRAE OB
 Database. Currently available on PyPI. More features coming in the
 furture.
 
-|pypi| |CI| |codecov| |license| |PyPI - Python Version|\ |Code style:
+|pypi| |CI| |codecov| |license| |PyPI - Python Version| |Code style:
 black|
 
 Installation
@@ -123,7 +123,7 @@ TODO
 API Reference
 -------------
 
-TODO
+https://obplatform.readthedocs.io/en/latest/index.html
 
 .. |pypi| image:: https://img.shields.io/pypi/v/obplatform.svg
    :target: https://pypi.python.org/pypi/obplatform

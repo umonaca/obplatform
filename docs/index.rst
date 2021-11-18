@@ -17,7 +17,7 @@ A package to interact and download behavior data from ASHRAE OB
 Database. Currently available on PyPI. More features coming in the
 furture.
 
-|pypi| |CI| |codecov| |license| |PyPI - Python Version|\ |Code style:
+|pypi| |CI| |codecov| |license| |PyPI - Python Version| |Code style:
 black|
 
 Installation
