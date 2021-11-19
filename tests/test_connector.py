@@ -2,7 +2,7 @@ import json
 from typing import Any
 
 import responses
-from obplatform.connector import ENDPOINT, Connector
+from obplatform.connector import ENDPOINT, Connector, tqdm
 from pytest_mock import MockFixture
 
 
@@ -127,3 +127,13 @@ def test_download_export(mocker: MockFixture) -> None:
         show_progress_bar=False,
     )
     spy_start.assert_called_with(["Appliance_Usage", "Occupancy"], ["22", "11", "2"])
+
+    # Check tqdm progress bar is called
+    spy_tqdm = mocker.patch("obplatform.connector.tqdm")
+    connector.download_export(
+        filename="test.json",
+        behavior_ids=["Appliance_Usage", "Occupancy"],
+        studies=[22, "11", 2],
+        show_progress_bar=True,
+    )
+    spy_tqdm.assert_called_once()
