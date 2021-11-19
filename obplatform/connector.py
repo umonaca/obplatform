@@ -13,12 +13,7 @@ ENDPOINT = "https://api.ashraeobdatabase.com"
 
 
 class Connector:
-    """Connector to the remote database
-
-    Attributes:
-        endpoint: The endpoint of the remote database
-        session: Requests session to communicate with the remote database
-    """
+    """Connector to the remote database"""
 
     def __init__(self, endpoint: str = ENDPOINT) -> None:
         """Initialize the connector
