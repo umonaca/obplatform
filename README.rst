@@ -107,6 +107,7 @@ Changelog
 ---------
 
 -  2021-11-18: Release 0.1.3
+-  2021-11-19: Release 0.1.4, fixed a minor issue with Python 3.10.0
 
 TODO
 ----
@@ -136,3 +137,4 @@ https://obplatform.readthedocs.io/en/latest/index.html
 .. |Code style: black| image:: https://img.shields.io/badge/code%20style-black-000000.svg
    :target: https://github.com/psf/black
 .. |Read the Docs| image:: https://img.shields.io/readthedocs/obplatform
+   :target: https://obplatform.readthedocs.io/en/latest/index.html

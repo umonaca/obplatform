@@ -118,6 +118,7 @@ Changelog
 ---------
 
 -  2021-11-18: Release 0.1.3
+-  2021-11-19: Release 0.1.4, fixed a minor issue with Python 3.10.0
 
 TODO
 ----
