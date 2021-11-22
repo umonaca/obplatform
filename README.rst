@@ -3,10 +3,10 @@ OBPlatform
 
 A package to interact and download behavior data from `ASHRAE Global
 Occupant Behavior Database <https://ashraeobdatabase.com>`__. Currently
-available on PyPI. More features coming in the furture.
+available on PyPI and conda-forge. More features coming in the furture.
 
-|pypi| |CI| |codecov| |license| |PyPI - Python Version| |Code style:
-black| |Read the Docs|
+|pypi| |conda-forge| |CI| |codecov| |license| |PyPI - Python Version|
+|Code style: black| |Read the Docs|
 
 Features
 --------
@@ -38,8 +38,9 @@ pip
 conda
 ~~~~~
 
-We are going to submit the package to ``conda-forge``. It requires
-manual review process from Anaconda.
+::
+
+   conda install -c conda-forge obplatform
 
 Example
 -------
@@ -128,6 +129,8 @@ https://obplatform.readthedocs.io/en/latest/index.html
 
 .. |pypi| image:: https://img.shields.io/pypi/v/obplatform.svg
    :target: https://pypi.python.org/pypi/obplatform
+.. |conda-forge| image:: https://img.shields.io/conda/vn/conda-forge/obplatform
+   :target: https://github.com/conda-forge/obplatform-feedstock#installing-obplatform
 .. |CI| image:: https://github.com/umonaca/obplatform/actions/workflows/test.yml/badge.svg?event=push
    :target: https://github.com/umonaca/obplatform/actions?query=event%3Apush+branch%3Amaster
 .. |codecov| image:: https://codecov.io/gh/umonaca/obplatform/branch/master/graph/badge.svg?token=SCFFFX2IKX
