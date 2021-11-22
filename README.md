@@ -31,7 +31,7 @@ pip install --upgrade obplatform
 conda install -c conda-forge obplatform
 ```
 
-If you see an error like the following when resolving dependencies, it's caused by [a bug](https://github.com/conda/conda/issues/10969) in conda with python 3.10.
+**For Python 3.10**: If you see an error like the following when resolving dependencies, it's caused by [a bug](https://github.com/conda/conda/issues/10969) in conda with Python 3.10.
 
 ```
 Collecting package metadata (current_repodata.json): done
@@ -44,10 +44,19 @@ PackagesNotFoundError: The following packages are not available from current cha
   - python=3.1
 ```
 
-Two possible solutions:
+Three possible solutions:
 
-1. Create a new conda environment with python 3.9. Or:
-2. Upgrade conda to a new version.
+1. Create a new conda environment with Python <3.10.
+2. Upgrade conda to a new version. (conda released 4.11.0 on 11/22/2021 at GitHub, which fixed the bug for Python 3.10. However, it will still take some time before conda 4.11.0 is available on Anaconda Cloud).
+3. Use [mamba](https://github.com/mamba-org/mamba), which is a reimplementation of the conda package manager in C++. It is much faster and contains less bugs.
+
+### mamba
+
+Once you activate the environment through conda or micromamba:
+
+```
+mamba install -c conda-forge obplatform
+```
 
 ## Example
 
