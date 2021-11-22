@@ -42,6 +42,26 @@ conda
 
    conda install -c conda-forge obplatform
 
+If you see an error like the following when resolving dependencies, it’s
+caused by `a bug <https://github.com/conda/conda/issues/10969>`__ in
+conda with python 3.10.
+
+::
+
+   Collecting package metadata (current_repodata.json): done
+   Solving environment: failed with initial frozen solve. Retrying with flexible solve.
+   Collecting package metadata (repodata.json): done
+   Solving environment: failed with initial frozen solve. Retrying with flexible solve.
+
+   PackagesNotFoundError: The following packages are not available from current channels:
+
+     - python=3.1
+
+Two possible solutions:
+
+1. Create a new conda environment with python 3.9. Or:
+2. Upgrade conda to a new version.
+
 Example
 -------
 
