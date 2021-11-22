@@ -33,7 +33,7 @@ pip
 
 ::
 
-   pip install obplatform
+   pip install --upgrade obplatform
 
 conda
 ~~~~~
