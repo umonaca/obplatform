@@ -129,6 +129,15 @@ class Connector:
                     progress_bar.update(len(chunk))
                     f.write(chunk)
 
+    def check_health(self) -> bool:
+        """Check the health of the remote database
+
+        Returns:
+            True if the backend server is working, False otherwise
+        """
+        response = self.session.get(self.endpoint + "/api/v1/health")
+        return response.json()["status"] == "ok"
+
 
 class ProgressBar:
     """Progress bar for download progress

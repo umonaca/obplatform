@@ -8,6 +8,22 @@ from obplatform.connector import ENDPOINT, Connector
 
 
 @responses.activate
+def test_check_health() -> None:
+    """Test the health check endpoint"""
+    responses.add(
+        method=responses.GET,
+        url=ENDPOINT + "/api/v1/health",
+        json={
+            "status": "ok",
+        },
+        status=200,
+    )
+
+    connector = Connector()
+    assert connector.check_health()
+
+
+@responses.activate
 def test_list_behaviors() -> None:
     with open("tests/fixtures/behaviors.json") as sample_file:
         behaviors: list[dict[str, Any]] = json.load(sample_file)
@@ -47,7 +63,7 @@ def test_poll_export_job() -> None:
     """
     # Process for 2 seconds
     wait_period = 2
-    for i in range(wait_period):
+    for _i in range(wait_period):
         responses.add(
             method=responses.GET,
             url=f"{ENDPOINT}/api/v1/exports/15270ec7-56bb-46aa-b2a7-ff58a781a048",
