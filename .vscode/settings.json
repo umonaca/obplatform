@@ -31,5 +31,6 @@
     "python.sortImports.args": [
         "--profile", "black",
     ],
-    "restructuredtext.confPath": "${workspaceFolder}/docs"
+    "restructuredtext.confPath": "${workspaceFolder}/docs",
+    "git.allowNoVerifyCommit": true
 }
