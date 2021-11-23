@@ -10,7 +10,7 @@
     "python.linting.flake8Args": [
         "--max-line-length=120",
         "--exclude .git,__pycache__,docs/conf.py,old,build,dist"
-    ],    
+    ],
     "python.linting.mypyEnabled": true,
     "python.linting.mypyArgs": [
         "--ignore-missing-imports",

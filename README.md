@@ -115,7 +115,7 @@ Study 2 is a special case. It has very large source files (> 2 GB) so we compres
 
 ## TODO
 
-- Add function to query available studies based on (behaviors, countries, cities, (building type + room type)) 
+- Add function to query available studies based on (behaviors, countries, cities, (building type + room type))
 - Add function to query available behavior types based on study ids
 - Auto detect and convert behavior type inputs to correct query parameters for web API
 - Fix naming inconsistencies on the server side (Occupancy Presence on the website, Occupancy_Measurement in file name, Occupancy in API key field)
@@ -123,4 +123,3 @@ Study 2 is a special case. It has very large source files (> 2 GB) so we compres
 ## API Reference
 
 https://obplatform.readthedocs.io/en/latest/index.html
-

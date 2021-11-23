@@ -2,8 +2,9 @@ import json
 from typing import Any
 
 import responses
-from obplatform.connector import ENDPOINT, Connector, tqdm
 from pytest_mock import MockFixture
+
+from obplatform.connector import ENDPOINT, Connector
 
 
 @responses.activate
