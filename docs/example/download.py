@@ -17,7 +17,7 @@ logger.setLevel(logging.INFO)
 # Download Appliance Usage + Occupant Presence behaviors from study 22, 11, and 2.
 connector.download_export(
     "data.zip",
-    ["Appliance_Usage", "Occupancy"],
+    ["Appliance_Usage", "Occupancy_Measurement"],
     ["22", "11", "2"],
     show_progress_bar=True,  # False to disable progrees bar
 )

@@ -115,7 +115,7 @@ Example
    # Download Appliance Usage + Occupant Presence behaviors from study 22, 11, and 2.
    connector.download_export(
        "data.zip",
-       ["Appliance_Usage", "Occupancy"],
+       ["Appliance_Usage", "Occupancy_Measurement"],
        ["22", "11", "2"],
        show_progress_bar=True,  # False to disable progrees bar
    )
@@ -139,7 +139,7 @@ Available behavior types
 
 ::
 
-   'Appliance_Usage', 'Fan_Status', 'Door_Status', 'HVAC_Measurement', 'Lighting_Status', 'Occupant_Number', 'Occupancy', 'Other_HeatWave', 'Other_Role of habits in consumption', 'Other_IAQ in Affordable Housing', 'Shading_Status', 'Window_Status'
+   'Appliance_Usage', 'Fan_Status', 'Door_Status', 'HVAC_Measurement', 'Lighting_Status', 'Occupant_Number', 'Occupancy_Measurement', 'Other_HeatWave', 'Other_Role of habits in consumption', 'Other_IAQ in Affordable Housing', 'Shading_Status', 'Window_Status'
 
 In the next version, the package will auto detect either type of input
 and convert to the correct query parameter.

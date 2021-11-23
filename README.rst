@@ -101,7 +101,7 @@ Example
    # Download Appliance Usage + Occupant Presence behaviors from study 22, 11, and 2.
    connector.download_export(
        "data.zip",
-       ["Appliance_Usage", "Occupancy"],
+       ["Appliance_Usage", "Occupancy_Measurement"],
        ["22", "11", "2"],
        show_progress_bar=True,  # False to disable progrees bar
    )
@@ -125,7 +125,7 @@ Please only use the following names as input. e.g. Please use
 
 ::
 
-   'Appliance_Usage', 'Fan_Status', 'Door_Status', 'HVAC_Measurement', 'Lighting_Status', 'Occupant_Number', 'Occupancy', 'Other_HeatWave', 'Other_Role of habits in consumption', 'Other_IAQ in Affordable Housing', 'Shading_Status', 'Window_Status'
+   'Appliance_Usage', 'Fan_Status', 'Door_Status', 'HVAC_Measurement', 'Lighting_Status', 'Occupant_Number', 'Occupancy_Measurement', 'Other_HeatWave', 'Other_Role of habits in consumption', 'Other_IAQ in Affordable Housing', 'Shading_Status', 'Window_Status'
 
 In the next version, the package will auto detect either type of input
 and convert to the correct query parameter.
@@ -145,6 +145,16 @@ Changelog
 
 -  2021-11-18: Release 0.1.3
 -  2021-11-19: Release 0.1.4, fixed a minor issue with Python 3.10.0
+-  2021-11-23: Release 1.0.0
+
+   -  Breaking changes:
+
+      -  Behavior type (query field) “Occupancy” has been renamed to
+         “Occupancy_Measurement” to keep the name consistent. The
+         example above has been changed accordingly.
+
+   -  Added endpoint to check backend server health
+   -
 
 TODO
 ----
@@ -152,11 +162,6 @@ TODO
 -  Add function to query available studies based on (behaviors,
    countries, cities, (building type + room type))
 -  Add function to query available behavior types based on study ids
--  Auto detect and convert behavior type inputs to correct query
-   parameters for web API
--  Fix naming inconsistencies on the server side (Occupancy Presence on
-   the website, Occupancy_Measurement in file name, Occupancy in API key
-   field)
 
 API Reference
 -------------
