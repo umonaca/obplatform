@@ -136,7 +136,7 @@ class Connector:
             True if the backend server is working, False otherwise
         """
         response = self.session.get(self.endpoint + "/api/v1/health")
-        return response.json()["status"] == "ok"
+        return response.json()["status"] == "ok"  # type: ignore
 
 
 class ProgressBar:
