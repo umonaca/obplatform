@@ -115,7 +115,6 @@ Study 2 is a special case. It has very large source files (> 2 GB) so we compres
 - 2021-11-23:  Release 1.0.0
   - Breaking changes:
     - Behavior type (query field) "Occupancy" has been renamed to "Occupancy_Measurement" to keep the name consistent. The example above has been changed accordingly.
-
   - Added endpoint to check backend server health
 
 

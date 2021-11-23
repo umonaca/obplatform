@@ -154,7 +154,6 @@ Changelog
          example above has been changed accordingly.
 
    -  Added endpoint to check backend server health
-   -
 
 TODO
 ----
