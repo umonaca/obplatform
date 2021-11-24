@@ -162,18 +162,24 @@ Changelog
 
 -  2021-11-18: Release 0.1.3
 -  2021-11-19: Release 0.1.4, fixed a minor issue with Python 3.10.0
+-  2021-11-23: Release 1.0.0
+
+   -  Breaking changes:
+
+      -  Behavior type (query field) “Occupancy” has been renamed to
+         “Occupancy_Measurement” to keep the name consistent. The
+         example above has been changed accordingly. The server will
+         reject query field “Occupancy”.
+
+   -  Added endpoint to check backend server health
+   -  Added endpoint to query available behavior types based on Study
+      IDs
 
 TODO
 ----
 
 -  Add function to query available studies based on (behaviors,
    countries, cities, (building type + room type))
--  Add function to query available behavior types based on study ids
--  Auto detect and convert behavior type inputs to correct query
-   parameters for web API
--  Fix naming inconsistencies on the server side (Occupancy Presence on
-   the website, Occupancy_Measurement in file name, Occupancy in API key
-   field)
 
 API Reference
 -------------
