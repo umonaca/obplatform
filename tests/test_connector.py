@@ -154,3 +154,35 @@ def test_download_export(mocker: MockFixture) -> None:
         show_progress_bar=True,
     )
     spy_tqdm.assert_called_once()
+
+
+@responses.activate
+def test_list_behaviors_in_studies() -> None:
+    with open("tests/fixtures/behaviors_in_studies.json") as sample_file:
+        study_behaviors: list[dict[str, Any]] = json.load(sample_file)
+        responses.add(
+            method=responses.GET,
+            url=f"{ENDPOINT}/api/v1/behaviors",
+            json=study_behaviors,
+            status=200,
+        )
+
+        connector = Connector(ENDPOINT)
+        assert (
+            connector.list_behaviors_in_studies(["1", "2", "3", "4"]) == study_behaviors
+        )
+
+
+def test_get_payload() -> None:
+    connector = Connector(ENDPOINT)
+    assert connector._get_payload(param="studies", _list=[1, 2, 3]) == {
+        "studies[0]": 1,
+        "studies[1]": 2,
+        "studies[2]": 3,
+    }
+
+    assert connector._get_payload(param="studies", _list=["1", "2", "3"]) == {
+        "studies[0]": "1",
+        "studies[1]": "2",
+        "studies[2]": "3",
+    }

@@ -28,3 +28,7 @@ study_id = "22"
 zf = zipfile.ZipFile("data.zip")
 df = pd.read_csv(zf.open(f"{behavior_type}_Study{study_id}.csv"))
 print(df.head())
+
+# List all behaviors available in study 1, 2, 3, and 4
+json_study_behaviors = connector.list_behaviors_in_studies(studies=["1", "2", "3", "4"])
+print(json_study_behaviors)

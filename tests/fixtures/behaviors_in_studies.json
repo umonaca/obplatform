@@ -1,0 +1,34 @@
+[
+    {
+        "Study_ID": 1,
+        "Behavior_Types": [
+            "Door_Status",
+            "Fan_Status",
+            "Window_Status",
+            "Shading_Status",
+            "Occupant_Number",
+            "Occupancy"
+        ]
+    },
+    {
+        "Study_ID": 2,
+        "Behavior_Types": [
+            "Appliance_Usage"
+        ]
+    },
+    {
+        "Study_ID": 3,
+        "Behavior_Types": [
+            "Window_Status",
+            "Door_Status",
+            "Fan_Status"
+        ]
+    },
+    {
+        "Study_ID": 4,
+        "Behavior_Types": [
+            "Occupant_Number",
+            "HVAC_Measurement"
+        ]
+    }
+]

@@ -19,7 +19,7 @@ class Connector:
         """Initialize the connector
 
         Args:
-            endpoint:
+            endpoint (str):
                 The endpoint of the remote database, currently this should be
                 "https://api.ashraeobdatabase.com"
         """
@@ -47,8 +47,8 @@ class Connector:
         """Inform server to start compressing data files for the given behaviors and studies
 
         Args:
-            behavior_ids: List of behavior ids to download
-            studies: List of study ids to download
+            behavior_ids (List[str]): List of behavior ids to download
+            studies (List[str]): List of study ids to download
 
         Returns:
             The URI of the job, used by _poll_export_job to check the status
@@ -69,7 +69,7 @@ class Connector:
         """Poll the export job status
 
         Args:
-            job_uri: The URI of the job, provided by _start_export_job
+            job_uri (str): The URI of the job, provided by _start_export_job
 
         Returns:
             The response of the server. The download has not started yet.
@@ -100,15 +100,15 @@ class Connector:
         """Download the data archive (ZIP) for the given behaviors
 
         Args:
-            filename:
+            filename (str):
                 The filename to save the archive
-            behavior_ids:
+            behavior_ids (List[int | str]):
                 List of behavior ids to download
-            studies:
+            studies (List[int | str]):
                 List of study ids to download
-            show_progress_bar:
+            show_progress_bar (bool):
                 Whether to show a progress bar
-            chunk_size:
+            chunk_size (Optional[int]):
                 The size of each chunk to download. If None, download the whole file.
                 Default is 1000 * 1024 Bytes.
         """
@@ -137,6 +137,38 @@ class Connector:
         """
         response = self.session.get(self.endpoint + "/api/v1/health")
         return response.json()["status"] == "ok"  # type: ignore
+
+    def _get_payload(self, param: str, _list: List[Any]) -> Dict[str, Any]:
+        """Get param dict used by requests
+
+        A list is seriealized in the following way when sent to the server:
+        Pseudo input: param='studies', _list=[1,2,3]
+        serialized query param (not URL encoded): studies[0]=1&studies[1]=2&studies[2]=3
+
+        Args:
+            param (str): the parameter name
+            _list (List[Any]): the list for the given parameter
+
+        Returns:
+            A dict with the parameter name and the list of values, to be used as requests payload
+        """
+        return {f"{param}[{i}]": item for i, item in enumerate(_list)}
+
+    def list_behaviors_in_studies(
+        self, studies: List[int | str]
+    ) -> List[Dict[str, Any]]:
+        """List available behaviors in each study
+
+        Args:
+            studies (int | str): List of study ids to query
+
+        Returns:
+            JSON encoded result of study id and behaviors in the study
+        """
+        payload = self._get_payload(param="studies", _list=studies)
+        response = self.session.get(self.endpoint + "/api/v1/behaviors", params=payload)
+
+        return response.json()  # type: ignore
 
 
 class ProgressBar:

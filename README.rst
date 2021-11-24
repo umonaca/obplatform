@@ -113,6 +113,10 @@ Example
    df = pd.read_csv(zf.open(f"{behavior_type}_Study{study_id}.csv"))
    print(df.head())
 
+   # List all behaviors available in study 1, 2, 3, and 4
+   json_study_behaviors = connector.list_behaviors_in_studies(studies=["1", "2", "3", "4"])
+   print(json_study_behaviors)
+
 Usage
 -----
 
@@ -151,16 +155,18 @@ Changelog
 
       -  Behavior type (query field) “Occupancy” has been renamed to
          “Occupancy_Measurement” to keep the name consistent. The
-         example above has been changed accordingly.
+         example above has been changed accordingly. The server will
+         reject query field “Occupancy”.
 
    -  Added endpoint to check backend server health
+   -  Added endpoint to query available behavior types based on Study
+      IDs
 
 TODO
 ----
 
 -  Add function to query available studies based on (behaviors,
    countries, cities, (building type + room type))
--  Add function to query available behavior types based on study ids
 
 API Reference
 -------------
