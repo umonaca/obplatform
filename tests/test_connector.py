@@ -31,7 +31,7 @@ def test_list_behaviors() -> None:
             responses.GET,
             f"{ENDPOINT}/api/v1/behaviors",
             json=behaviors,
-            status=404,
+            status=200,
         )
         connector = Connector(ENDPOINT)
         assert connector.list_behaviors() == behaviors
@@ -180,14 +180,80 @@ def test_list_behaviors_in_studies() -> None:
 
 def test_get_payload() -> None:
     connector = Connector(ENDPOINT)
-    assert connector._get_payload(param="studies", _list=[1, 2, 3]) == {
-        "studies[0]": 1,
-        "studies[1]": 2,
-        "studies[2]": 3,
+    assert connector._get_payload(params={"studies": [4, 5, 6]}) == {
+        "studies[0]": 4,
+        "studies[1]": 5,
+        "studies[2]": 6,
     }
 
-    assert connector._get_payload(param="studies", _list=["1", "2", "3"]) == {
-        "studies[0]": "1",
-        "studies[1]": "2",
-        "studies[2]": "3",
+    assert connector._get_payload(params={"studies": ["7", "8", "9"]}) == {
+        "studies[0]": "7",
+        "studies[1]": "8",
+        "studies[2]": "9",
     }
+
+    with open("tests/fixtures/studies_params.json") as studies_params:
+        studies_params: list[dict[str, Any]] = json.load(studies_params)
+
+        assert connector._get_payload(params=studies_params) == {
+            "behaviors[0]": "Appliance_Usage",
+            "behaviors[1]": "Occupancy_Measurement",
+            "countries[0]": "USA",
+            "countries[1]": "UK",
+            "cities[0]": "Palo Alto",
+            "cities[1]": "Coventry",
+            "cities[2]": "San Antonio",
+            "buildings[0][building_type]": "Educational",
+            "buildings[0][room_type]": "Classroom",
+            "buildings[1][building_type]": "Educational",
+            "buildings[1][room_type]": "Office",
+            "buildings[2][building_type]": "Residential",
+            "buildings[2][room_type]": "Single-Family House",
+        }
+
+
+@responses.activate
+def test_list_studies() -> None:
+    with open("tests/fixtures/studies_params.json") as sample_file:
+        query_params: list[dict[str, Any]] = json.load(sample_file)
+        # Covered in previous test
+        # query_params.pop("empty_test", None)
+        # print(query_params)
+
+        response_json = [
+            {
+                "Study_ID": 22,
+                "Published": 1,
+                "Year_Published": "2021",
+                "Title": "Data-driven optimization of building layouts for energy efficiency",
+                "Author": "Sonta, A., Dougherty, T. R., & Jain, R. K.",
+            }
+        ]
+        responses.add(
+            method=responses.GET,
+            url=f"{ENDPOINT}/api/v1/studies",
+            json=response_json,
+            status=200,
+        )
+
+        connector = Connector(ENDPOINT)
+
+        assert (
+            connector.list_studies(
+                behaviors=query_params["behaviors"],
+                countries=query_params["countries"],
+                cities=query_params["cities"],
+                buildings=query_params["buildings"],
+            )
+            == response_json
+        )
+
+        assert (
+            responses.calls[0].request.url == f"{ENDPOINT}/api/v1/studies?"
+            "behaviors%5B0%5D=Appliance_Usage&behaviors%5B1%5D=Occupancy_Measurement"
+            "&countries%5B0%5D=USA&countries%5B1%5D=UK"
+            "&cities%5B0%5D=Palo+Alto&cities%5B1%5D=Coventry&cities%5B2%5D=San+Antonio"
+            "&buildings%5B0%5D%5Bbuilding_type%5D=Educational&buildings%5B0%5D%5Broom_type%5D=Classroom"  # noqa: E501
+            "&buildings%5B1%5D%5Bbuilding_type%5D=Educational&buildings%5B1%5D%5Broom_type%5D=Office"  # noqa: E501
+            "&buildings%5B2%5D%5Bbuilding_type%5D=Residential&buildings%5B2%5D%5Broom_type%5D=Single-Family+House"  # noqa: E501
+        )

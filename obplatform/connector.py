@@ -138,21 +138,56 @@ class Connector:
         response = self.session.get(self.endpoint + "/api/v1/health")
         return response.json()["status"] == "ok"  # type: ignore
 
-    def _get_payload(self, param: str, _list: List[Any]) -> Dict[str, Any]:
-        """Get param dict used by requests
-
-        A list is seriealized in the following way when sent to the server:
-        Pseudo input: param='studies', _list=[1,2,3]
-        serialized query param (not URL encoded): studies[0]=1&studies[1]=2&studies[2]=3
+    def _yield_payload_dict_item(self, params):
+        """
+        Returns a dictionary key-value pair. Used by _get_payload_dict(params).
 
         Args:
-            param (str): the parameter name
-            _list (List[Any]): the list for the given parameter
+            params: Params dictionary. See _get_payload_dict(params) for details.
 
         Returns:
-            A dict with the parameter name and the list of values, to be used as requests payload
+            A dictionary key-value pair.
         """
-        return {f"{param}[{i}]": item for i, item in enumerate(_list)}
+        for key, list_ in params.items():
+            for i, item in enumerate(list_):
+                if not isinstance(item, dict):
+                    yield f"{key}[{i}]", item
+                else:
+                    for subkey, subvalue in item.items():
+                        yield f"{key}[{i}][{subkey}]", subvalue
+
+    def _get_payload(self, params):
+        """
+        Returns a dictionary of the form::
+
+            {
+                'behaviors[0]': 'Appliance_Usage',
+                'behaviors[1]': 'Occupancy_Measurement',
+                'countries[0]': 'USA',
+                'countries[1]': 'UK',
+                'cities[0]': 'Palo Alto',
+                'cities[1]': 'Coventry',
+                'cities[2]': 'San Antonio',
+                'buildings[0][building_type]': 'Educational',
+                'buildings[0][room_type]': 'Classroom',
+                'buildings[1][building_type]': 'Educational',
+                'buildings[1][room_type]': 'Office',
+                'buildings[2][building_type]': 'Residential',
+                'buildings[2][room_type]': 'Single-Family House'
+            }
+
+        You should not call this method directly. Please use public methods instead.
+        The purpose of this method is to serialize query parameters, which are
+        then passed to requests package and its underlining urllib3 function call
+        as payload.
+
+        Args:
+            params: Params dictionary.
+
+        Returns:
+            Payload dictionary, used by requests.
+        """
+        return dict(self._yield_payload_dict_item(params))
 
     def list_behaviors_in_studies(
         self, studies: List[int | str]
@@ -165,10 +200,63 @@ class Connector:
         Returns:
             JSON encoded result of study id and behaviors in the study
         """
-        payload = self._get_payload(param="studies", _list=studies)
+        payload = self._get_payload({"studies": studies})
         response = self.session.get(self.endpoint + "/api/v1/behaviors", params=payload)
 
         return response.json()  # type: ignore
+
+    def list_studies(
+        self,
+        behaviors: List[int | str],
+        countries: List[str],
+        cities: List[str],
+        buildings: List[Dict[str, str]],
+    ) -> List[Dict[str, Any]]:
+        """Query available studies based on behaviors, countries, cities
+        and buildings. This function works in the same way as clicking through
+        the "Export" page on the website.
+
+        Args:
+            behaviors (List[int | str]):
+                List of behavior ids to query
+            countries (List[str]):
+                List of country names to query
+            cities (List[str]):
+                List of city names to query
+            buildings (List[Dict[str, Any]]):
+                List of building types and room types to query.
+                Must be in the following format::
+
+                    [
+                        {
+                            "building_type": "Educational",
+                            "room_type": "Classroom",
+                        },
+                        {
+                            "building_type": "Educational",
+                            "room_type": "Office",
+                        },
+                        {
+                            "building_type": "Residential",
+                            "room_type": "Single-Family House",
+                        },
+                    ]
+
+        Returns:
+            JSON encoded result of study ids available in the database
+            filtered by the criteria.
+        """
+        payload = self._get_payload(
+            params={
+                "behaviors": behaviors,
+                "countries": countries,
+                "cities": cities,
+                "buildings": buildings,
+            }
+        )
+        response = self.session.get(self.endpoint + "/api/v1/studies", params=payload)
+
+        return response.json()
 
 
 class ProgressBar:
