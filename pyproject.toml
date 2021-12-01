@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "obplatform"
-version = "1.0.0"
+version = "1.1.0"
 description = "APIs to access ASHRAE OB Database"
 authors = ["Wei Mu <wmu100@syr.edu>"]
 readme = "README.md"
