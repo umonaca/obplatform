@@ -27,8 +27,8 @@ Features
 -  Download data archive (ZIP file) based on behavior type and study id
    inputs (with progress bar).
 -  Query studies based on (behaviors, countries, cities, (building type
-   + room type)) (WIP).
--  Query available behavior types based on study ids (WIP)
+   + room type))
+-  Query available behavior types based on study ids
 
 Installation
 ------------
@@ -131,6 +131,29 @@ Example
    json_study_behaviors = connector.list_behaviors_in_studies(studies=["1", "2", "3", "4"])
    print(json_study_behaviors)
 
+   # List all studies available in the database, filtered by behavior types,
+   # countries, cities, {building type, room_type} combinations.
+   json_studies = connector.list_studies(
+       behaviors=["Occupancy_Measurement", "Appliance_Usage"],
+       countries=["USA", "UK"],
+       cities=["Palo Alto", "Coventry", "San Antonio"],
+       buildings=[
+           {
+               "building_type": "Educational",
+               "room_type": "Classroom",
+           },
+           {
+               "building_type": "Educational",
+               "room_type": "Office",
+           },
+           {
+               "building_type": "Residential",
+               "room_type": "Single-Family House",
+           },
+       ],
+   )
+   print(json_studies)
+
 Usage
 -----
 
@@ -175,11 +198,10 @@ Changelog
    -  Added endpoint to query available behavior types based on Study
       IDs
 
-TODO
-----
+-  2021-12-01: Release 1.1.0
 
--  Add function to query available studies based on (behaviors,
-   countries, cities, (building type + room type))
+   -  Added endpoint to query available studies based on (behaviors,
+      countries, cities, (building type + room type))
 
 API Reference
 -------------

@@ -32,3 +32,26 @@ print(df.head())
 # List all behaviors available in study 1, 2, 3, and 4
 json_study_behaviors = connector.list_behaviors_in_studies(studies=["1", "2", "3", "4"])
 print(json_study_behaviors)
+
+# List all studies available in the database, filtered by behavior types,
+# countries, cities, {building type, room_type} combinations.
+json_studies = connector.list_studies(
+    behaviors=["Occupancy_Measurement", "Appliance_Usage"],
+    countries=["USA", "UK"],
+    cities=["Palo Alto", "Coventry", "San Antonio"],
+    buildings=[
+        {
+            "building_type": "Educational",
+            "room_type": "Classroom",
+        },
+        {
+            "building_type": "Educational",
+            "room_type": "Office",
+        },
+        {
+            "building_type": "Residential",
+            "room_type": "Single-Family House",
+        },
+    ],
+)
+print(json_studies)

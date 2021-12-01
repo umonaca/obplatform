@@ -8,8 +8,8 @@ A package to interact and download behavior data from [ASHRAE Global Occupant Be
 
 - List all behavior types available in the database.
 - Download data archive (ZIP file) based on behavior type and study id inputs (with progress bar).
-- Query studies based on (behaviors, countries, cities, (building type + room type)) (WIP).
-- Query available behavior types based on study ids (WIP)
+- Query studies based on (behaviors, countries, cities, (building type + room type))
+- Query available behavior types based on study ids
 
 ## Installation
 
@@ -94,6 +94,29 @@ print(df.head())
 # List all behaviors available in study 1, 2, 3, and 4
 json_study_behaviors = connector.list_behaviors_in_studies(studies=["1", "2", "3", "4"])
 print(json_study_behaviors)
+
+# List all studies available in the database, filtered by behavior types,
+# countries, cities, {building type, room_type} combinations.
+json_studies = connector.list_studies(
+    behaviors=["Occupancy_Measurement", "Appliance_Usage"],
+    countries=["USA", "UK"],
+    cities=["Palo Alto", "Coventry", "San Antonio"],
+    buildings=[
+        {
+            "building_type": "Educational",
+            "room_type": "Classroom",
+        },
+        {
+            "building_type": "Educational",
+            "room_type": "Office",
+        },
+        {
+            "building_type": "Residential",
+            "room_type": "Single-Family House",
+        },
+    ],
+)
+print(json_studies)
 ```
 
 ## Usage
@@ -121,11 +144,9 @@ Study 2 is a special case. It has very large source files (> 2 GB) so we compres
     - Behavior type (query field) "Occupancy" has been renamed to "Occupancy_Measurement" to keep the name consistent. The example above has been changed accordingly. The server will reject query field "Occupancy".
   - Added endpoint to check backend server health
   - Added endpoint to query available behavior types based on Study IDs
+- 2021-12-01: Release 1.1.0
+  - Added endpoint to query available studies based on (behaviors, countries, cities, (building type + room type))
 
-
-## TODO
-
-- Add function to query available studies based on (behaviors, countries, cities, (building type + room type))
 
 ## API Reference
 
