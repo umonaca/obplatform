@@ -2,7 +2,7 @@
 from __future__ import annotations
 
 import time
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, Iterator, List, Optional, Tuple
 
 import requests
 from tqdm import tqdm
@@ -139,14 +139,16 @@ class Connector:
         response = self.session.get(self.endpoint + "/api/v1/health")
         return response.json()["status"] == "ok"  # type: ignore
 
-    def _yield_payload_dict_item(self, params):
+    def _yield_payload_dict_item(
+        self, params: Dict[str, Any]
+    ) -> Iterator[Tuple[str, str]]:
         """
         Returns a dictionary key-value pair. Used by _get_payload_dict(params).
 
         Args:
             params: Params dictionary. See _get_payload_dict(params) for details.
 
-        Returns:
+        Yields:
             A dictionary key-value pair.
         """
         for key, list_ in params.items():
@@ -157,7 +159,7 @@ class Connector:
                     for subkey, subvalue in item.items():
                         yield f"{key}[{i}][{subkey}]", subvalue
 
-    def _get_payload(self, params):
+    def _get_payload(self, params: Dict[str, Any]) -> Dict[str, str]:
         """
         Returns a dictionary of the form::
 
@@ -257,7 +259,7 @@ class Connector:
         )
         response = self.session.get(self.endpoint + "/api/v1/studies", params=payload)
         response.raise_for_status()
-        return response.json()
+        return response.json()  # type: ignore
 
 
 class ProgressBar:
