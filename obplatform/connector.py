@@ -41,6 +41,7 @@ class Connector:
             this module to query and download the data from the database.
         """
         response = self.session.get(self.endpoint + "/api/v1/behaviors")
+        response.raise_for_status()
         return response.json()  # type: ignore
 
     def _start_export_job(self, behavior_ids: List[str], studies: List[str]) -> str:
@@ -202,7 +203,7 @@ class Connector:
         """
         payload = self._get_payload({"studies": studies})
         response = self.session.get(self.endpoint + "/api/v1/behaviors", params=payload)
-
+        response.raise_for_status()
         return response.json()  # type: ignore
 
     def list_studies(
@@ -255,7 +256,7 @@ class Connector:
             }
         )
         response = self.session.get(self.endpoint + "/api/v1/studies", params=payload)
-
+        response.raise_for_status()
         return response.json()
 
 
