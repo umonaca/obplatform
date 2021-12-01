@@ -172,6 +172,11 @@ def test_list_behaviors_in_studies() -> None:
             connector.list_behaviors_in_studies(["1", "2", "3", "4"]) == study_behaviors
         )
 
+        assert (
+            responses.calls[0].request.url == f"{ENDPOINT}/api/v1/behaviors?"
+            "studies%5B0%5D=1&studies%5B1%5D=2&studies%5B2%5D=3&studies%5B3%5D=4"
+        )
+
 
 def test_get_payload() -> None:
     connector = Connector(ENDPOINT)
