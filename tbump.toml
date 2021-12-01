@@ -27,6 +27,7 @@ src = "obplatform/__init__.py"
 
 [[file]]
 src = "pyproject.toml"
+search = 'version = "{current_version}"'
 
 # You can specify a list of commands to
 # run after the files have been patched
