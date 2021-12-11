@@ -14,15 +14,15 @@ print(connector.list_behaviors())
 # Comment out the following line to hide progress information
 logger.setLevel(logging.INFO)
 
-# Download Appliance Usage + Occupant Presence behaviors from study 22, 11, and 2.
+# Download Plug Load + Occupant Presence behaviors from study 22, 11, and 2.
 connector.download_export(
     "data.zip",
-    ["Appliance_Usage", "Occupancy_Measurement"],
+    ["Plug_Load", "Occupancy_Measurement"],
     ["22", "11", "2"],
     show_progress_bar=True,  # False to disable progrees bar
 )
 
-behavior_type = "Appliance_Usage"
+behavior_type = "Plug_Load"
 study_id = "22"
 
 zf = zipfile.ZipFile("data.zip")
@@ -36,7 +36,7 @@ print(json_study_behaviors)
 # List all studies available in the database, filtered by behavior types,
 # countries, cities, {building type, room_type} combinations.
 json_studies = connector.list_studies(
-    behaviors=["Occupancy_Measurement", "Appliance_Usage"],
+    behaviors=["Occupancy_Measurement", "Plug_Load"],
     countries=["USA", "UK"],
     cities=["Palo Alto", "Coventry", "San Antonio"],
     buildings=[

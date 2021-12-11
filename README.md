@@ -65,6 +65,7 @@ import logging
 import zipfile
 
 import pandas as pd
+
 from obplatform import Connector, logger
 
 connector = Connector()
@@ -76,15 +77,15 @@ print(connector.list_behaviors())
 # Comment out the following line to hide progress information
 logger.setLevel(logging.INFO)
 
-# Download Appliance Usage + Occupant Presence behaviors from study 22, 11, and 2.
+# Download Plug Load + Occupant Presence behaviors from study 22, 11, and 2.
 connector.download_export(
     "data.zip",
-    ["Appliance_Usage", "Occupancy_Measurement"],
+    ["Plug_Load", "Occupancy_Measurement"],
     ["22", "11", "2"],
     show_progress_bar=True,  # False to disable progrees bar
 )
 
-behavior_type = "Appliance_Usage"
+behavior_type = "Plug_Load"
 study_id = "22"
 
 zf = zipfile.ZipFile("data.zip")
@@ -98,7 +99,7 @@ print(json_study_behaviors)
 # List all studies available in the database, filtered by behavior types,
 # countries, cities, {building type, room_type} combinations.
 json_studies = connector.list_studies(
-    behaviors=["Occupancy_Measurement", "Appliance_Usage"],
+    behaviors=["Occupancy_Measurement", "Plug_Load"],
     countries=["USA", "UK"],
     cities=["Palo Alto", "Coventry", "San Antonio"],
     buildings=[
@@ -126,7 +127,7 @@ print(json_studies)
 Please only use the following names as input. e.g. Please use `Lighting_Status` (listed below) instead of  `Lighting Adjustment`(displayed on the website).
 
 ```
-'Appliance_Usage', 'Fan_Status', 'Door_Status', 'HVAC_Measurement', 'Lighting_Status', 'Occupant_Number', 'Occupancy_Measurement', 'Other_HeatWave', 'Other_Role of habits in consumption', 'Other_IAQ in Affordable Housing', 'Shading_Status', 'Window_Status'
+'Plug_Load', 'Fan_Status', 'Door_Status', 'HVAC_Measurement', 'Lighting_Status', 'Occupant_Number', 'Occupancy_Measurement', 'Other_HeatWave', 'Other_Role of habits in consumption', 'Other_IAQ in Affordable Housing', 'Shading_Status', 'Window_Status'
 ```
 
 In the next version, the package will auto detect either type of input and convert to the correct query parameter.
@@ -146,6 +147,9 @@ Study 2 is a special case. It has very large source files (> 2 GB) so we compres
   - Added endpoint to query available behavior types based on Study IDs
 - 2021-12-01: Release 1.1.0
   - Added endpoint to query available studies based on (behaviors, countries, cities, (building type + room type))
+- 2021-12-10:
+  - Breaking change: renamed Appliance Usage to Plug Load on the server end. The example code has been changed accordingly.
+
 
 
 ## API Reference
