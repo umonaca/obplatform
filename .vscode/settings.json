@@ -31,6 +31,6 @@
     "python.sortImports.args": [
         "--profile", "black",
     ],
-    "restructuredtext.confPath": "${workspaceFolder}/docs",
-    "git.allowNoVerifyCommit": true
+    "git.allowNoVerifyCommit": true,
+    "esbonio.sphinx.confDir": "${workspaceFolder}/docs"
 }
